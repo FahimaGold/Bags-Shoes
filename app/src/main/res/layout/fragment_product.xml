@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".bagsshoes.bagsshoes.ui.ProductFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+     <androidx.constraintlayout.widget.ConstraintLayout
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content">
+
+
+         <ImageView
+             android:id="@+id/productDetailImage"
+             android:layout_width="300dp"
+             android:layout_height="300dp"
+             android:layout_marginStart="50dp"
+             android:layout_marginTop="4dp"
+             android:cropToPadding="true"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintHorizontal_bias="0.0"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toTopOf="parent"
+             tools:src="@tools:sample/avatars" />
+
+         <TextView
+             android:id="@+id/productDetailPrice"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginStart="24dp"
+             android:layout_marginTop="36dp"
+             android:text="220$"
+             android:textColor="#000000"
+             android:textSize="24sp"
+             android:textStyle="bold"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintHorizontal_bias="0.0"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toBottomOf="@+id/productDetailImage" />
+
+         <TextView
+             android:id="@+id/brandTextView"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginStart="24dp"
+             android:layout_marginTop="20dp"
+             android:text="@string/brand_text"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toBottomOf="@+id/productDetailPrice" />
+
+         <TextView
+             android:id="@+id/productDetailBrand"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginStart="6dp"
+             android:layout_marginTop="20dp"
+             android:text="TextView"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintHorizontal_bias="0.0"
+             app:layout_constraintStart_toEndOf="@+id/brandTextView"
+             app:layout_constraintTop_toBottomOf="@+id/productDetailPrice" />
+
+         <TextView
+             android:id="@+id/productCodeTextView"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginStart="24dp"
+             android:layout_marginTop="12dp"
+             android:text="@string/product_id_text"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toBottomOf="@+id/productDetailBrand" />
+
+         <TextView
+             android:id="@+id/productCode"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginStart="6dp"
+             android:layout_marginTop="12dp"
+             android:text=""
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintHorizontal_bias="0.008"
+             app:layout_constraintStart_toEndOf="@+id/productCodeTextView"
+             app:layout_constraintTop_toBottomOf="@+id/productDetailBrand" />
+
+         <TextView
+             android:id="@+id/availablityTextVew"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginStart="24dp"
+             android:layout_marginTop="12dp"
+             android:text="@string/availablity_text"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toBottomOf="@+id/productCodeTextView" />
+
+         <TextView
+             android:id="@+id/available"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginStart="12dp"
+             android:layout_marginTop="12dp"
+             android:text="TextView"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintHorizontal_bias="0.0"
+             app:layout_constraintStart_toEndOf="@+id/availablityTextVew"
+             app:layout_constraintTop_toBottomOf="@+id/productCode" />
+
+         <TextView
+             android:id="@+id/description"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginStart="24dp"
+             android:layout_marginTop="20dp"
+             android:text="@string/description_text"
+             android:textColor="@color/colorAccent"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toBottomOf="@+id/availablityTextVew" />
+
+         <TextView
+             android:id="@+id/descriptionContent"
+             android:layout_width="35dp"
+             android:layout_height="1dp"
+             android:layout_marginStart="24dp"
+             android:layout_marginTop="12dp"
+             android:inputType="textMultiLine"
+             android:text="TextView"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintHorizontal_bias="0.06"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toBottomOf="@+id/description" />
+
+         <ImageView
+             android:id="@+id/favoritesIcon"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="36dp"
+             app:srcCompat="@drawable/ic_action_favorites_empty"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintHorizontal_bias="0.502"
+             app:layout_constraintStart_toEndOf="@+id/productDetailPrice"
+             app:layout_constraintTop_toBottomOf="@+id/productDetailImage" />
+     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.core.widget.NestedScrollView>
