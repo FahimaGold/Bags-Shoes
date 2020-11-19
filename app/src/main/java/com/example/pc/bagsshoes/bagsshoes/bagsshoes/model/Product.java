@@ -3,6 +3,9 @@ package com.example.pc.bagsshoes.bagsshoes.bagsshoes.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.Objects;
+
+import androidx.annotation.Nullable;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
@@ -117,5 +120,23 @@ public class Product implements Parcelable {
         dest.writeString( description );
         dest.writeString( category );
     }
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if(obj == this)
+            return true;
+        if(obj == null || obj.getClass() != this.getClass())
+            return false;
+        Product p2 = (Product) obj;
+        return id == p2.getId()
+                && price == p2.getPrice()
+                && (brand == p2.getBrand() || (brand != null) && brand.equals( p2.brand ))
+                && (description == p2.getDescription() || (description != null && description.equals( p2.getDescription() )))
+                && (category == p2.getCategory() || (category != null && category.equals( p2.getCategory() )))
+                && (imgUrl == p2.getImgUrl() || (imgUrl != null && imgUrl.equals( p2.getImgUrl() )));
+    }
 }

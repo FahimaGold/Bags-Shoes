@@ -33,7 +33,7 @@ public class ProductViewModel extends ViewModel {
 
     public void getProducts(){
 
-        final ArrayList<Product> li = new ArrayList<>();
+
         productRepository.getProducts()
                 .subscribeOn( SchedulerProvider.getInstance().io() )
                 .observeOn( SchedulerProvider.getInstance().ui() )
@@ -61,7 +61,7 @@ public class ProductViewModel extends ViewModel {
                     @Override
                     public void onComplete() {
 
-                        productList.setValue( li );
+
                     }
                 } );
 

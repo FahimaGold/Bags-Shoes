@@ -36,8 +36,7 @@ public class ProductDetailViewModel extends ViewModel {
 
     public void getFavoriteProducts(){
 
-        final ArrayList<Product> li = new ArrayList<>();
-        productDetailRepository.getFavoriteFProducts()
+        productDetailRepository.getFavoriteProducts()
                 .subscribeOn( SchedulerProvider.getInstance().io() )
                 .observeOn( SchedulerProvider.getInstance().ui() )
                 .subscribe( new Observer<List<Product>>() {
@@ -64,7 +63,7 @@ public class ProductDetailViewModel extends ViewModel {
                     @Override
                     public void onComplete() {
 
-                        favoriteProductList.setValue( li );
+
                     }
                 } );
 
@@ -97,12 +96,7 @@ public class ProductDetailViewModel extends ViewModel {
 
                     }
                 } );
-      /*  Completable.fromRunnable(new Runnable(){
-            @Override
-            public void run() {
-                productDetailRepository.addProductToFavorites( product );
-            }
-        });*/
+
 
 
 

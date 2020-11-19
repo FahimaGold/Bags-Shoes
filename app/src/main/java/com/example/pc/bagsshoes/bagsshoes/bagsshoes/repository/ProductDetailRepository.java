@@ -17,7 +17,7 @@ public class ProductDetailRepository {
     public ProductDetailRepository(ProductDao productDao){
         this.productDao = productDao;
     }
-    public Observable<List<Product>> getFavoriteFProducts(){
+    public Observable<List<Product>> getFavoriteProducts(){
         return productDao.getAllFavoriteProducts();
     }
 
