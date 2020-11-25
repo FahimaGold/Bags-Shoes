@@ -65,6 +65,14 @@ public class ProductDetailViewModelTest {
 
     @Test
     public void addProductToFavoritesTest() {
-       
+        List<Product> products = new ArrayList<>();
+        Product p = new Product( 1, "Gucci", 3642, "", "Gucci Shoe", "SHOE" );
+        products.add( p );
+        productDetailViewModel.addProductToFavorites( p );
+        when(productDetailRepository.getFavoriteProducts()).thenReturn( Observable.just( products ) );
+        productDetailViewModel.getFavoriteProducts();
+        Assert.assertEquals( products,productDetailViewModel.getFavoriteProductList().getValue());
+
     }
+
 }
