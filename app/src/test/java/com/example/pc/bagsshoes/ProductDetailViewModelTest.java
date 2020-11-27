@@ -21,6 +21,8 @@ import java.util.List;
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import io.reactivex.Observable;
 
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 @RunWith(JUnit4.class)
@@ -65,13 +67,10 @@ public class ProductDetailViewModelTest {
 
     @Test
     public void addProductToFavoritesTest() {
-        List<Product> products = new ArrayList<>();
         Product p = new Product( 1, "Gucci", 3642, "", "Gucci Shoe", "SHOE" );
-        products.add( p );
         productDetailViewModel.addProductToFavorites( p );
-        when(productDetailRepository.getFavoriteProducts()).thenReturn( Observable.just( products ) );
-        productDetailViewModel.getFavoriteProducts();
-        Assert.assertEquals( products,productDetailViewModel.getFavoriteProductList().getValue());
+        verify( productDetailRepository ).addProductToFavorites( p );
+        verifyNoMoreInteractions( productDetailRepository );
 
     }
 
