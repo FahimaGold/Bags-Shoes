@@ -41,11 +41,7 @@ import static org.mockito.Mockito.when;
 @RunWith(JUnit4.class)
 public class ProductViewModelTest {
 
-    /*Swaps the background executor with a different one that executes each task synchronously
-    so that assertEquals doesn't get called before the the other methods if they run async
-    Hence avoid any problem with the test result.
-    This rule is important for testing LiveData.
-    */
+    //Replacing the background task executor with one that runs everything synchronously
     @Rule public InstantTaskExecutorRule instantExecutorRule = new InstantTaskExecutorRule();
 
     /*To override the default schedulers;  using another scheduler instead of an  android one as these are unit tests,

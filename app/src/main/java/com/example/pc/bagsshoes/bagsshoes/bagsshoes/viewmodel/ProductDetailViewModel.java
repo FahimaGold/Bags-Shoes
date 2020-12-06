@@ -103,6 +103,32 @@ public class ProductDetailViewModel extends ViewModel {
     }
 
     public void deleteProductFromFavorites(long id){
-        productDetailRepository.deleteProductFromFavorites( id );
+           Observable<Long> observable = Observable.just( id );
+           observable.subscribeOn( SchedulerProvider.getInstance().io() )
+                   .subscribe( new Observer<Long>() {
+                       @Override
+                       public void onSubscribe(@NonNull Disposable d) {
+
+                       }
+
+                       @Override
+                       public void onNext(@NonNull Long aLong) {
+                           productDetailRepository.deleteProductFromFavorites( aLong );
+
+                       }
+
+                       @Override
+                       public void onError(@NonNull Throwable e) {
+
+                       }
+
+                       @Override
+                       public void onComplete() {
+
+                       }
+                   } );
+
+
+
     }
 }
