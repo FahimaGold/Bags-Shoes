@@ -50,7 +50,20 @@ public class ProductDaoTest {
 
    @Test
     public void addAndGetFavoritesAndDeleteTest() throws Exception {
-
+        Product p = new Product( 1, "Gucci", 3642, "", "Gucci Shoe", "SHOE" );
+        List<Product> products = new ArrayList<>();
+        products.add( p );
+        productDao.addProductToFavorites( p);
+        TestObserver<List<Product>> testObserver = new TestObserver<>();
+        productDao.getAllFavoriteProducts().subscribe(testObserver);
+        testObserver.assertNoErrors();
+        testObserver.assertValue( products );
+        products.remove( p );
+        productDao.deleteProductFromFavorites( 1 );
+        testObserver = new TestObserver<>();
+        productDao.getAllFavoriteProducts().subscribe(testObserver);
+        testObserver.assertNoErrors();
+        testObserver.assertEmpty();
 
     }
 
