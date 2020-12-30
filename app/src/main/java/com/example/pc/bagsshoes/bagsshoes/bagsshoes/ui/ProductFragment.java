@@ -104,18 +104,36 @@ public class ProductFragment extends Fragment {
         binding.descriptionContent.setText( p.getDescription() );
         binding.productCode.setText( p.getId() + "" );
         binding.available.setText( "In store" );
-        //
+        observeData();
+        productDetailViewModel.isFavorite( p.getId() );
 
         //Changing the "heart" favorites icon on click
         binding.favoritesIcon.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                productDetailViewModel.addProductToFavorites( p );
-                Toast.makeText( getContext(), "" + p.getBrand() + " added to favorites!", Toast.LENGTH_SHORT ).show();
-                binding.favoritesIcon.setColorFilter( ContextCompat.getColor( getContext(),R.color.colorPrimary ), PorterDuff.Mode.SRC_IN);
+
+                    productDetailViewModel.addProductToFavorites( p );
+                    Toast.makeText( getContext(), "" + p.getBrand() + " added to favorites!", Toast.LENGTH_SHORT ).show();
+                    binding.favoritesIcon.setColorFilter( ContextCompat.getColor( getContext(),R.color.colorPrimary ), PorterDuff.Mode.SRC_IN);
+               
+
             }
         } );
     }
 
+
+    private void observeData() {
+        Log.i("observeData","jjjj");
+        productDetailViewModel.checkFavorite().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                Toast.makeText( getContext(), "This product is favorite " + aBoolean , Toast.LENGTH_SHORT ).show();
+                if(aBoolean)
+                    binding.favoritesIcon.setColorFilter( ContextCompat.getColor( getContext(),R.color.colorPrimary ), PorterDuff.Mode.SRC_IN);
+
+            }
+
+        });
+    }
 
 }

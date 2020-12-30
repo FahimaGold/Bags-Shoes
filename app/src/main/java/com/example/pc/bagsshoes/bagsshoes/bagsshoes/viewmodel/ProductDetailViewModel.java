@@ -24,6 +24,7 @@ import io.reactivex.disposables.Disposable;
 public class ProductDetailViewModel extends ViewModel {
     private ProductDetailRepository productDetailRepository;
     private MutableLiveData<ArrayList<Product>> favoriteProductList = new MutableLiveData<>();
+    private MutableLiveData<Boolean> isProductFavorite = new MutableLiveData<>();
 
     @ViewModelInject
     public ProductDetailViewModel(ProductDetailRepository productDetailRepository){
@@ -32,6 +33,10 @@ public class ProductDetailViewModel extends ViewModel {
 
     public MutableLiveData<ArrayList<Product>> getFavoriteProductList(){
         return favoriteProductList;
+    }
+
+    public MutableLiveData<Boolean> checkFavorite(){
+        return isProductFavorite;
     }
 
     public void getFavoriteProducts(){
@@ -97,10 +102,35 @@ public class ProductDetailViewModel extends ViewModel {
                     }
                 } );
 
-
-
-
     }
+
+    public void isFavorite(long id) {
+
+        productDetailRepository.isFavorite(id).subscribeOn( SchedulerProvider.getInstance().io() )
+                .observeOn( SchedulerProvider.getInstance().ui() )
+                .subscribe( new Observer<Boolean>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull Boolean aBoolean) {
+                       isProductFavorite.setValue( aBoolean );
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                } );
+    }
+
 
     public void deleteProductFromFavorites(long id){
            Observable<Long> observable = Observable.just( id );

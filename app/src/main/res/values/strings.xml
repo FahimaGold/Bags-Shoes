@@ -21,4 +21,6 @@
     <string name="availablity_text">Availability: </string>
     <string name="description_text">Description</string>
     <string name="no_favorites">No favorites yet</string>
+    <string name="favorites_activity">Favorites</string>
+    <string name="detail_activity">Details</string>
 </resources>

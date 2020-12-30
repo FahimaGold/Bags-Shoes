@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     tools:context=".bagsshoes.bagsshoes.ui.FavoritesActivity"
     android:id="@+id/favorites_fragment_holder"
-    android:background="#fff">
+    android:background="#fff"
+    >
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"

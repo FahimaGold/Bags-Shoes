@@ -26,5 +26,6 @@ public interface ProductDao {
     @Query( "SELECT * FROM product;" )
     Observable<List<Product>> getAllFavoriteProducts();
 
-
+    @Query( "SELECT EXISTS (SELECT 1 FROM product where id = :id)" )
+    Observable<Boolean> isFavorite(long id);
 }

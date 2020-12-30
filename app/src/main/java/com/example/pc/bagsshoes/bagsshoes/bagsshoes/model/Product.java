@@ -19,9 +19,7 @@ public class Product implements Parcelable {
     private String imgUrl;
     private String description;
     private String category;
-/*    private int id;
-    private String title;
-    private boolean completed;*/
+
     @Ignore
     public Product (){
 
@@ -120,10 +118,7 @@ public class Product implements Parcelable {
         dest.writeString( description );
         dest.writeString( category );
     }
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
+
 
     @Override
     public boolean equals(@Nullable Object obj) {

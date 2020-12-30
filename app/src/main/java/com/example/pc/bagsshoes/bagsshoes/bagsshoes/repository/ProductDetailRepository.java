@@ -29,4 +29,8 @@ public class ProductDetailRepository {
         productDao.addProductToFavorites( product );
     }
 
+    public Observable<Boolean> isFavorite(long id){
+        return productDao.isFavorite( id );
+    }
+
 }

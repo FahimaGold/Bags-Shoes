@@ -1,6 +1,7 @@
 package com.example.pc.bagsshoes;
 
 import android.content.Context;
+import android.util.Log;
 
 
 import com.example.pc.bagsshoes.bagsshoes.bagsshoes.db.Database;
@@ -49,23 +50,45 @@ public class ProductDaoTest {
     }
 
    @Test
-    public void addAndGetFavoritesAndDeleteTest() throws Exception {
+    public void addAndGetFavoritesAndDeleteTest() {
         Product p = new Product( 1, "Gucci", 3642, "", "Gucci Shoe", "SHOE" );
         List<Product> products = new ArrayList<>();
         products.add( p );
+        //Testing insertion
         productDao.addProductToFavorites( p);
         TestObserver<List<Product>> testObserver = new TestObserver<>();
         productDao.getAllFavoriteProducts().subscribe(testObserver);
         testObserver.assertNoErrors();
         testObserver.assertValue( products );
         products.remove( p );
+        //Testing deletion
         productDao.deleteProductFromFavorites( 1 );
         testObserver = new TestObserver<>();
         productDao.getAllFavoriteProducts().subscribe(testObserver);
         testObserver.assertNoErrors();
-        testObserver.assertEmpty();
+        testObserver.assertValue( products );
+
+
 
     }
 
+    @Test
+    public void isFavoriteTest(){
+        Product p = new Product( 1, "Gucci", 3642, "", "Gucci Shoe", "SHOE" );
+        productDao.addProductToFavorites( p );
+        //Checking existing case
+
+        TestObserver<Boolean> testObserver = new TestObserver<>();
+        productDao.isFavorite( 1 ).subscribe(testObserver);
+        testObserver.assertNoErrors();
+        testObserver.assertValue( true );
+
+        //Checking not existing
+        testObserver = new TestObserver<>();
+        productDao.isFavorite( 2 ).subscribe(testObserver);
+        testObserver.assertNoErrors();
+        testObserver.assertValue( false );
+
+    }
 
 }
