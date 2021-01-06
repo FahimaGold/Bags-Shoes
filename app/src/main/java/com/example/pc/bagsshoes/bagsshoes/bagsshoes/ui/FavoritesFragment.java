@@ -1,5 +1,7 @@
 package com.example.pc.bagsshoes.bagsshoes.bagsshoes.ui;
 
+import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,7 +10,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import dagger.hilt.EntryPoint;
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -21,9 +25,11 @@ import android.widget.Toast;
 import com.example.pc.bagsshoes.R;
 import com.example.pc.bagsshoes.bagsshoes.bagsshoes.adapters.ProductAdapter;
 import com.example.pc.bagsshoes.bagsshoes.bagsshoes.model.Product;
+import com.example.pc.bagsshoes.bagsshoes.bagsshoes.providers.ItemTouchHelperCallback;
 import com.example.pc.bagsshoes.bagsshoes.bagsshoes.viewmodel.ProductDetailViewModel;
 import com.example.pc.bagsshoes.bagsshoes.bagsshoes.viewmodel.ProductViewModel;
 import com.example.pc.bagsshoes.databinding.FragmentFavoritesBinding;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
@@ -95,10 +101,12 @@ public class FavoritesFragment extends Fragment {
         initRecyclerView();
         observeData();
         productDetailViewModel.getFavoriteProducts();
+
+        enableSwipeToDeleteAndUndo();
     }
 
     private void observeData() {
-        Log.i("observeData","enter");
+
         productDetailViewModel.getFavoriteProductList().observe(getViewLifecycleOwner(), new Observer<ArrayList<Product>>() {
             @Override
             public void onChanged(ArrayList<Product> products) {
@@ -125,5 +133,59 @@ public class FavoritesFragment extends Fragment {
             }
         } );
         binding.favoritesRecyclerview.setAdapter(adapter);
+
+
+    }
+
+    private void enableSwipeToDeleteAndUndo() {
+
+        ItemTouchHelperCallback swipeToDeleteCallback = new ItemTouchHelperCallback(getContext()) {
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+
+                final int position = viewHolder.getAdapterPosition();
+                final Product product = adapter.getProductAt( position );
+                adapter.removeItem( position );
+
+
+                Snackbar snackbar = Snackbar
+                        .make(binding.container, R.string.remove_from_fav_snackbar, Snackbar.LENGTH_LONG);
+
+                snackbar.addCallback(new Snackbar.Callback() {
+
+                    @Override
+                    public void onDismissed(Snackbar snackbar, int event) {
+
+                        if (event == Snackbar.Callback.DISMISS_EVENT_TIMEOUT) {
+                            // Snackbar closed on its own
+                            //It means the user did not cancel the delete, so we delete product from db
+                            productDetailViewModel.deleteProductFromFavorites( product.getId());
+
+                        }
+                    }
+
+                    @Override
+                    public void onShown(Snackbar snackbar) {
+
+                    }
+                });
+                snackbar.setAction("UNDO", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        adapter.restoreItem(product, position);
+                        adapter.notifyDataSetChanged();
+                        binding.favoritesRecyclerview.scrollToPosition(position);
+
+                    }
+                });
+
+                snackbar.setActionTextColor( Color.YELLOW);
+                snackbar.show();
+
+
+            }
+        };
+        ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeToDeleteCallback);
+        itemTouchhelper.attachToRecyclerView(binding.favoritesRecyclerview);
     }
 }

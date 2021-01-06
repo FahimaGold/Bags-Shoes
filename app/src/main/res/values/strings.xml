@@ -23,4 +23,5 @@
     <string name="no_favorites">No favorites yet</string>
     <string name="favorites_activity">Favorites</string>
     <string name="detail_activity">Details</string>
+    <string name="remove_from_fav_snackbar">Product was removed from favorites.</string>
 </resources>

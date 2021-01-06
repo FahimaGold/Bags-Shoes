@@ -16,17 +16,34 @@ import com.example.pc.bagsshoes.bagsshoes.bagsshoes.viewmodel.ProductViewModel;
 import com.example.pc.bagsshoes.databinding.RecyclerviewItemLayoutBinding;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
+public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> implements ItemTouchHelperAdapter {
 
     private Context mContext;
     private ArrayList<Product> mList;
     private RecyclerviewItemLayoutBinding binding;
 
     private OnItemClickListener mOnItemClickListener;
+
+
+    @Override
+    public void removeItem(int position) {
+        mList.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    @Override
+    public void restoreItem(Product product, int position) {
+
+        mList.add(position, product);
+        notifyItemInserted(position);
+
+    }
+
 
     public interface OnItemClickListener {
         public void onItemClick(View view, int position);
@@ -59,7 +76,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             @Override
             public void onClick(View v) {
                 mOnItemClickListener.onItemClick(v, holder.getAdapterPosition());
-                Toast.makeText( mContext, "CLicked:", Toast.LENGTH_SHORT ).show();
                 Intent i = new Intent(mContext, ProductActivity.class );
                 Product p = new Product(mList.get( position ).getId(), mList.get( position ).getBrand(), mList.get( position ).getPrice(), mList.get( position ).getImgUrl(), mList.get( position ).getDescription(), mList.get( position ).getCategory());
 
@@ -95,6 +111,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     }
 
     public  Product getProductAt(int position){
+
         return mList.get(position);
     }
 }

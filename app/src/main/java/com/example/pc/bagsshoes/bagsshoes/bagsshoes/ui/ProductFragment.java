@@ -115,7 +115,7 @@ public class ProductFragment extends Fragment {
                     productDetailViewModel.addProductToFavorites( p );
                     Toast.makeText( getContext(), "" + p.getBrand() + " added to favorites!", Toast.LENGTH_SHORT ).show();
                     binding.favoritesIcon.setColorFilter( ContextCompat.getColor( getContext(),R.color.colorPrimary ), PorterDuff.Mode.SRC_IN);
-               
+
 
             }
         } );
