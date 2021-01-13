@@ -23,7 +23,8 @@
              app:layout_constraintHorizontal_bias="0.0"
              app:layout_constraintStart_toStartOf="parent"
              app:layout_constraintTop_toTopOf="parent"
-             tools:src="@tools:sample/avatars" />
+             tools:src="@tools:sample/avatars"
+             android:contentDescription="@string/product_image"/>
 
          <TextView
              android:id="@+id/productDetailPrice"
@@ -139,7 +140,8 @@
              app:layout_constraintEnd_toEndOf="parent"
              app:layout_constraintHorizontal_bias="0.502"
              app:layout_constraintStart_toEndOf="@+id/productDetailPrice"
-             app:layout_constraintTop_toBottomOf="@+id/productDetailImage" />
+             app:layout_constraintTop_toBottomOf="@+id/productDetailImage"
+             android:contentDescription="@string/favorite_icon"/>
      </androidx.constraintlayout.widget.ConstraintLayout>
 
 

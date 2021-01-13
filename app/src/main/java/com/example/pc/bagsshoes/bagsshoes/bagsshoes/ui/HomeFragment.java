@@ -93,9 +93,9 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated( view, savedInstanceState );
 
-        Log.i("lola","Hey!");
+
         productViewModel = new ViewModelProvider(this).get(ProductViewModel.class);
-        Log.i("observeData","Home Fragment!");
+
         initRecyclerView();
         observeData();
         productViewModel.getProducts();

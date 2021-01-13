@@ -1,6 +1,5 @@
 package com.example.pc.bagsshoes.bagsshoes.bagsshoes.ui;
 
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -13,21 +12,18 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import dagger.hilt.EntryPoint;
 import dagger.hilt.android.AndroidEntryPoint;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.pc.bagsshoes.R;
 import com.example.pc.bagsshoes.bagsshoes.bagsshoes.adapters.ProductAdapter;
 import com.example.pc.bagsshoes.bagsshoes.bagsshoes.model.Product;
-import com.example.pc.bagsshoes.bagsshoes.bagsshoes.providers.ItemTouchHelperCallback;
+import com.example.pc.bagsshoes.bagsshoes.bagsshoes.helpers.ItemTouchHelperCallback;
 import com.example.pc.bagsshoes.bagsshoes.bagsshoes.viewmodel.ProductDetailViewModel;
-import com.example.pc.bagsshoes.bagsshoes.bagsshoes.viewmodel.ProductViewModel;
 import com.example.pc.bagsshoes.databinding.FragmentFavoritesBinding;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -146,7 +142,6 @@ public class FavoritesFragment extends Fragment {
                 final int position = viewHolder.getAdapterPosition();
                 final Product product = adapter.getProductAt( position );
                 adapter.removeItem( position );
-
 
                 Snackbar snackbar = Snackbar
                         .make(binding.container, R.string.remove_from_fav_snackbar, Snackbar.LENGTH_LONG);

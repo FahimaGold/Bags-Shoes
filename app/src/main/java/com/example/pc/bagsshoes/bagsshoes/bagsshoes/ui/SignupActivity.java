@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
-public class AuthenticationActivity extends AppCompatActivity {
+public class SignupActivity extends AppCompatActivity {
     private ActivityAuthenticationBinding binding;
 
     @Override

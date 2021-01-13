@@ -1,4 +1,4 @@
-package com.example.pc.bagsshoes.bagsshoes.bagsshoes.providers;
+package com.example.pc.bagsshoes.bagsshoes.bagsshoes.helpers;
 
 import javax.annotation.Nullable;
 

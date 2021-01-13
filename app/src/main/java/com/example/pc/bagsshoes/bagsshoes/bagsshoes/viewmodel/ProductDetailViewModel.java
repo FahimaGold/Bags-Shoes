@@ -3,18 +3,15 @@ package com.example.pc.bagsshoes.bagsshoes.bagsshoes.viewmodel;
 import android.util.Log;
 
 import com.example.pc.bagsshoes.bagsshoes.bagsshoes.model.Product;
-import com.example.pc.bagsshoes.bagsshoes.bagsshoes.providers.SchedulerProvider;
+import com.example.pc.bagsshoes.bagsshoes.bagsshoes.helpers.SchedulerProvider;
 import com.example.pc.bagsshoes.bagsshoes.bagsshoes.repository.ProductDetailRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
 import androidx.hilt.lifecycle.ViewModelInject;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;

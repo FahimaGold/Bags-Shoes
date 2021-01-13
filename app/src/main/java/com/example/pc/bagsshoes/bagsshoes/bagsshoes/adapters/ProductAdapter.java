@@ -2,21 +2,17 @@ package com.example.pc.bagsshoes.bagsshoes.bagsshoes.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.pc.bagsshoes.bagsshoes.bagsshoes.model.Product;
-import com.example.pc.bagsshoes.bagsshoes.bagsshoes.providers.StringRProvider;
+import com.example.pc.bagsshoes.bagsshoes.bagsshoes.helpers.StringRProvider;
 import com.example.pc.bagsshoes.bagsshoes.bagsshoes.ui.ProductActivity;
-import com.example.pc.bagsshoes.bagsshoes.bagsshoes.viewmodel.ProductViewModel;
 import com.example.pc.bagsshoes.databinding.RecyclerviewItemLayoutBinding;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;

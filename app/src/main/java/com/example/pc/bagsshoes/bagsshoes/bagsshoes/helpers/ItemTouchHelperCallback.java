@@ -1,4 +1,4 @@
-package com.example.pc.bagsshoes.bagsshoes.bagsshoes.providers;
+package com.example.pc.bagsshoes.bagsshoes.bagsshoes.helpers;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -10,14 +10,10 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 
-import com.example.pc.bagsshoes.bagsshoes.bagsshoes.adapters.ItemTouchHelperAdapter;
-
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
-
-import static com.google.android.material.color.MaterialColors.ALPHA_FULL;
 
 
 public class ItemTouchHelperCallback extends ItemTouchHelper.Callback {

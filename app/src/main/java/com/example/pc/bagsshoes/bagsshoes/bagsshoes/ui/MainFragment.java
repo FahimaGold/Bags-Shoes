@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-import com.example.pc.bagsshoes.R;
 import com.example.pc.bagsshoes.databinding.FragmentLoginBinding;
 
 
@@ -78,7 +77,7 @@ public class MainFragment extends Fragment {
         binding.signupText.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getContext(), AuthenticationActivity.class);
+                Intent i = new Intent(getContext(), SignupActivity.class);
                 startActivity( i );
             }
         } );

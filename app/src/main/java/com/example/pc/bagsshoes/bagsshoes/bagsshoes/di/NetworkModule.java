@@ -9,7 +9,8 @@ import dagger.hilt.InstallIn;
 import dagger.hilt.android.components.ApplicationComponent;
 
 import com.example.pc.bagsshoes.bagsshoes.bagsshoes.network.ProductAPIService;
-import com.example.pc.bagsshoes.bagsshoes.bagsshoes.providers.StringRProvider;
+import com.example.pc.bagsshoes.bagsshoes.bagsshoes.network.UserAPIService;
+import com.example.pc.bagsshoes.bagsshoes.bagsshoes.helpers.StringRProvider;
 
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -29,5 +30,17 @@ public class NetworkModule {
                 .addCallAdapterFactory( RxJava2CallAdapterFactory.create())
                 .build()
                 .create(ProductAPIService.class);
+    }
+
+    @Provides
+    @Singleton
+    public static UserAPIService provideUserAPIService(){
+
+        return new Retrofit.Builder()
+                .baseUrl( StringRProvider.BASE_URL +"user/" )
+                .addConverterFactory( GsonConverterFactory.create())
+                .addCallAdapterFactory( RxJava2CallAdapterFactory.create())
+                .build()
+                .create(UserAPIService.class);
     }
 }

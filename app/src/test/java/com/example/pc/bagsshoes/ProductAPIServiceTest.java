@@ -2,21 +2,15 @@ package com.example.pc.bagsshoes;
 
 import com.example.pc.bagsshoes.bagsshoes.bagsshoes.model.Product;
 import com.example.pc.bagsshoes.bagsshoes.bagsshoes.network.ProductAPIService;
-import com.example.pc.bagsshoes.bagsshoes.bagsshoes.providers.StringRProvider;
-import com.google.gson.JsonArray;
+import com.example.pc.bagsshoes.bagsshoes.bagsshoes.helpers.StringRProvider;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.mockito.Mock;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.observers.TestObserver;
-import okhttp3.*;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;

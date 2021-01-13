@@ -15,7 +15,7 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 
 
-import com.example.pc.bagsshoes.bagsshoes.bagsshoes.providers.SchedulerProvider;
+import com.example.pc.bagsshoes.bagsshoes.bagsshoes.helpers.SchedulerProvider;
 import com.example.pc.bagsshoes.bagsshoes.bagsshoes.repository.ProductRepository;
 
 public class ProductViewModel extends ViewModel {
