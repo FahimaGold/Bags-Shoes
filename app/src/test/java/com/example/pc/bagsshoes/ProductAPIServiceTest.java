@@ -3,14 +3,19 @@ package com.example.pc.bagsshoes;
 import com.example.pc.bagsshoes.bagsshoes.bagsshoes.model.Product;
 import com.example.pc.bagsshoes.bagsshoes.bagsshoes.network.ProductAPIService;
 import com.example.pc.bagsshoes.bagsshoes.bagsshoes.helpers.StringRProvider;
+import com.google.gson.Gson;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.observers.TestObserver;
+import okhttp3.mockwebserver.MockResponse;
+import okhttp3.mockwebserver.MockWebServer;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -19,19 +24,21 @@ public class ProductAPIServiceTest {
 
 
     private ProductAPIService productAPIService;
+    private MockWebServer server;
 
     @Before
-    public void createService(){
-        productAPIService = new Retrofit.Builder()
-                .baseUrl( StringRProvider.BASE_URL +"api/v0/" )
-                .addConverterFactory( GsonConverterFactory.create())
-                .addCallAdapterFactory( RxJava2CallAdapterFactory.create())
-                .build()
-                .create(ProductAPIService.class);
+    public void setup() throws IOException {
+        server = new MockWebServer();
+        server.start();
+
     }
 
+    @After
+    public void clear() throws IOException {
+        server.shutdown();
+    }
     @Test
-    public void getProductsTest()  {
+    public void getProductsSuccessTest()  {
 
         List<Product> list = new ArrayList<>();
 
@@ -48,11 +55,22 @@ public class ProductAPIServiceTest {
         p = new Product( 1, "Aldo", 12500, "s-l225.jpg", "Her Aldo Shoes", "SHOE");
         list.add( p );
 
+        //Scheduling the expected response
+        server.enqueue( new MockResponse().setBody(new Gson().toJson( list)  ));
 
+        //Setting a mock url
+        productAPIService = new Retrofit.Builder()
+                .baseUrl( server.url( "/" ) )
+                .addConverterFactory( GsonConverterFactory.create())
+                .addCallAdapterFactory( RxJava2CallAdapterFactory.create())
+                .build()
+                .create(ProductAPIService.class);
         TestObserver<List<Product>> testObserver = new TestObserver<>();
         productAPIService.getProducts().subscribe(testObserver);
         testObserver.assertNoErrors();
         testObserver.assertValue(list);
 
     }
+
+
 }

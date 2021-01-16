@@ -4,18 +4,19 @@ import com.example.pc.bagsshoes.bagsshoes.bagsshoes.helpers.ISharedPreferencesHe
 import com.example.pc.bagsshoes.bagsshoes.bagsshoes.helpers.SharedPreferencesHelper;
 import com.example.pc.bagsshoes.bagsshoes.bagsshoes.model.AuthenticationResponse;
 import com.example.pc.bagsshoes.bagsshoes.bagsshoes.model.User;
+import com.example.pc.bagsshoes.bagsshoes.bagsshoes.model.UserCredentials;
 import com.example.pc.bagsshoes.bagsshoes.bagsshoes.network.UserAPIService;
 
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
 
-public class UserRegistrationRepository {
+public class AuthenticationRepository {
     private UserAPIService userAPIService;
     private SharedPreferencesHelper sharedPreferencesHelper;
 
     @Inject
-    public UserRegistrationRepository(UserAPIService userAPIService, SharedPreferencesHelper sharedPreferencesHelper){
+    public AuthenticationRepository(UserAPIService userAPIService, SharedPreferencesHelper sharedPreferencesHelper){
         this.userAPIService = userAPIService;
         this.sharedPreferencesHelper = sharedPreferencesHelper;
     }
@@ -23,6 +24,11 @@ public class UserRegistrationRepository {
     public Observable<AuthenticationResponse> registerUser (User user){
         return userAPIService.registerUser( user );
     }
+
+    public Observable<AuthenticationResponse> loginUser (UserCredentials userCredentials){
+        return userAPIService.loginUser( userCredentials );
+    }
+
 
     public String getToken(){
         return this.sharedPreferencesHelper.getToken();

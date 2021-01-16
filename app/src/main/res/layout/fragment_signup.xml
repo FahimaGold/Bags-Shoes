@@ -5,7 +5,7 @@
     android:id="@+id/main_fragment_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".bagsshoes.bagsshoes.ui.MainFragment">
+    tools:context=".bagsshoes.bagsshoes.ui.LoginFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
