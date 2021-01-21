@@ -22,8 +22,10 @@
     <string name="description_text">Description</string>
     <string name="no_favorites">No favorites yet</string>
     <string name="favorites_activity">Favorites</string>
+    <string name="cart_activity">Cart</string>
     <string name="detail_activity">Details</string>
     <string name="remove_from_fav_snackbar">Product was removed from favorites.</string>
     <string name="product_image">Product image</string>
     <string name="favorite_icon">Favorite icon</string>
+    <string name="checkout_btn">Checkout</string>
 </resources>

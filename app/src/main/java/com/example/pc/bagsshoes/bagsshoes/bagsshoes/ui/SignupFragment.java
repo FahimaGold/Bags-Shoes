@@ -110,6 +110,7 @@ public class SignupFragment extends Fragment {
                     //Registration successful,store token
                     authenticationViewModel.setToken( response.getToken() );
                     authenticationViewModel.setLogin( true );
+                    authenticationViewModel.setUserId( response.getUserId() );
                     Intent i = new Intent(getContext(), HomeActivity.class);
                     startActivity( i );
                 }

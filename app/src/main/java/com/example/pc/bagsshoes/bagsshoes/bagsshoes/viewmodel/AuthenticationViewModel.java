@@ -49,7 +49,6 @@ public class AuthenticationViewModel extends ViewModel {
                     @Override
                     public void onNext(@NonNull AuthenticationResponse authenticationResponse) {
                         response.setValue( authenticationResponse );
-
                     }
 
                     @Override
@@ -66,7 +65,7 @@ public class AuthenticationViewModel extends ViewModel {
                             try {
                                 String error = body.string();
                                 JSONObject json = new JSONObject(error);
-                                AuthenticationResponse authenticationResponse = new AuthenticationResponse("", json.getString( "error" ));
+                                AuthenticationResponse authenticationResponse = new AuthenticationResponse(0,"", json.getString( "error" ));
                                 response.setValue(authenticationResponse);
                                 Log.i( "Erno", "ERROR: " + error );
 
@@ -99,7 +98,7 @@ public class AuthenticationViewModel extends ViewModel {
                     @Override
                     public void onNext(@NonNull AuthenticationResponse authenticationResponse) {
                         response.setValue( authenticationResponse );
-
+                        Log.i("userModel","user id is " + authenticationResponse.getUserId());
                     }
 
                     @Override
@@ -116,7 +115,7 @@ public class AuthenticationViewModel extends ViewModel {
                             try {
                                 String error = body.string();
                                 JSONObject json = new JSONObject(error);
-                                AuthenticationResponse authenticationResponse = new AuthenticationResponse("", json.getString( "error" ));
+                                AuthenticationResponse authenticationResponse = new AuthenticationResponse(0,"", json.getString( "error" ));
                                 response.setValue(authenticationResponse);
                                 Log.i( "Erno", "ERROR: " + error );
 
@@ -150,5 +149,13 @@ public class AuthenticationViewModel extends ViewModel {
 
     public void setLogin(boolean login){
         this.authenticationRepository.setLogin( login );
+    }
+
+    public int getUserId(){
+        return this.authenticationRepository.getUserId();
+    }
+
+    public void setUserId(int userId){
+        this.authenticationRepository.setUserId( userId );
     }
 }

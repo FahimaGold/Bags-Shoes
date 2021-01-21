@@ -49,7 +49,7 @@ public class AuthenticationViewModelTest {
     @Test
     public void registerUserTest(){
         User user = new User("some.email@example.com", "firtname", "surname", "0770369971", "somePassword");
-        AuthenticationResponse authenticationResponse = new AuthenticationResponse("gggg99aaddfxz", "password");
+        AuthenticationResponse authenticationResponse = new AuthenticationResponse(1,"gggg99aaddfxz", "password");
         when( authenticationRepository.registerUser( user ) ).thenReturn( Observable.just( authenticationResponse ) );
         authenticationViewModel.registerUser( user );
         Assert.assertEquals( authenticationResponse,authenticationViewModel.getAuthenticationResponse().getValue());
@@ -59,7 +59,7 @@ public class AuthenticationViewModelTest {
     @Test
     public void loginUserTest(){
         UserCredentials user = new UserCredentials("some.email@example.com","somePassword");
-        AuthenticationResponse authenticationResponse = new AuthenticationResponse("gggg99aaddfxz", "password");
+        AuthenticationResponse authenticationResponse = new AuthenticationResponse(1,"gggg99aaddfxz", "password");
         when( authenticationRepository.loginUser( user ) ).thenReturn( Observable.just( authenticationResponse ) );
         authenticationViewModel.loginUser( user );
         Assert.assertEquals( authenticationResponse,authenticationViewModel.getAuthenticationResponse().getValue());

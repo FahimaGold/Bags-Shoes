@@ -5,4 +5,6 @@ public interface ISharedPreferencesHelper {
     void setToken(String token);
     boolean isLogin();
     void setLogin(boolean login);
+    int getUserId();
+    void setUserId(int userId);
 }

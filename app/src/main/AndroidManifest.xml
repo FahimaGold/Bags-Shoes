@@ -10,10 +10,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".bagsshoes.bagsshoes.ui.FavoritesActivity"
-            android:label="@string/favorites_activity"></activity>
-        <activity android:name=".bagsshoes.bagsshoes.ui.ProductActivity"
-            android:label="@string/detail_activity"/>
+        <activity android:name=".bagsshoes.bagsshoes.ui.CartActivity"
+            android:label="@string/cart_activity"></activity>
+        <activity
+            android:name=".bagsshoes.bagsshoes.ui.FavoritesActivity"
+            android:label="@string/favorites_activity" />
+        <activity
+            android:name=".bagsshoes.bagsshoes.ui.ProductActivity"
+            android:label="@string/detail_activity" />
         <activity
             android:name=".bagsshoes.bagsshoes.ui.HomeActivity"
             android:label="@string/title_activity_home"

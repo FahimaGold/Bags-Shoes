@@ -47,7 +47,7 @@ public class UserAPIServiceTest {
     @Test
     public void registerUserTest(){
         //Expected response on a successful registration
-        AuthenticationResponse authenticationResponse = new AuthenticationResponse("zadff444ssfrz", "");
+        AuthenticationResponse authenticationResponse = new AuthenticationResponse(1,"zadff444ssfrz", "");
 
         //Schedule the expected response on a successful registration
         server.enqueue( new MockResponse().setBody(new Gson().toJson( authenticationResponse )  ));
@@ -71,7 +71,7 @@ public class UserAPIServiceTest {
     @Test
     public void loginUserTest(){
 
-        AuthenticationResponse authenticationResponse = new AuthenticationResponse("zadff444ssfrz", "");
+        AuthenticationResponse authenticationResponse = new AuthenticationResponse(1, "zadff444ssfrz", "");
         server.enqueue( new MockResponse().setBody(new Gson().toJson( authenticationResponse )  ));
         userAPIService = new Retrofit.Builder()
                 .baseUrl( server.url( "/" ) )

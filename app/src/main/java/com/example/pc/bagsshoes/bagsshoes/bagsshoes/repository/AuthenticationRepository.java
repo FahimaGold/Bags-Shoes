@@ -45,4 +45,12 @@ public class AuthenticationRepository {
     public void setLogin(boolean login){
         this.sharedPreferencesHelper.setLogin( login );
     }
+
+    public int getUserId(){
+        return this.sharedPreferencesHelper.getUserId();
+    }
+
+    public void setUserId(int userId){
+        this.sharedPreferencesHelper.setUserId( userId );
+    }
 }

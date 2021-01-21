@@ -13,12 +13,15 @@ public class SharedPreferencesHelper implements ISharedPreferencesHelper{
     private SharedPreferences prefs;
     private final static String TOKEN = "token";
     private final static  String LOGIN = "login";
+    private final static String USER_ID = "userId";
 
 
     @Inject
     public SharedPreferencesHelper(@ApplicationContext Context context) {
         this.prefs = context.getSharedPreferences( "prefs", Context.MODE_PRIVATE );
     }
+
+
 
     @Override
     public String getToken() {
@@ -44,5 +47,17 @@ public class SharedPreferencesHelper implements ISharedPreferencesHelper{
         mEditor.putBoolean(LOGIN, login);
         mEditor.apply();
 
+    }
+
+    @Override
+    public int getUserId() {
+        return prefs.getInt( USER_ID, 0);
+    }
+
+    @Override
+    public void setUserId(int userId) {
+        SharedPreferences.Editor mEditor = prefs.edit();
+        mEditor.putInt(USER_ID, userId);
+        mEditor.apply();
     }
 }

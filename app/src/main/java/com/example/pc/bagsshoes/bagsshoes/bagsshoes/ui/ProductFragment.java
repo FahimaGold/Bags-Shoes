@@ -115,7 +115,7 @@ public class ProductFragment extends Fragment {
 
 
     private void observeData() {
-        Log.i("observeData","jjjj");
+
         productDetailViewModel.checkFavorite().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {

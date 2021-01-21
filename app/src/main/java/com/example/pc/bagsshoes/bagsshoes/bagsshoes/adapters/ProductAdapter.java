@@ -25,7 +25,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     private OnItemClickListener mOnItemClickListener;
 
-
+    //Used for the swiping to delete an item from recyclerview
     @Override
     public void removeItem(int position) {
         mList.remove(position);
@@ -64,7 +64,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         holder.itemLayoutBinding.productBrand.setText(mList.get(position).getBrand());
-        holder.itemLayoutBinding.productPrice.setText("" + mList.get(position).getPrice() + "DA");
+        holder.itemLayoutBinding.productPrice.setText("" + mList.get(position).getPrice() + "$");
 
         Glide.with(mContext).load( StringRProvider.BASE_URL + mList.get(position).getImgUrl())
                 .into(holder.itemLayoutBinding.productImage);
@@ -74,7 +74,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 mOnItemClickListener.onItemClick(v, holder.getAdapterPosition());
                 Intent i = new Intent(mContext, ProductActivity.class );
                 Product p = new Product(mList.get( position ).getId(), mList.get( position ).getBrand(), mList.get( position ).getPrice(), mList.get( position ).getImgUrl(), mList.get( position ).getDescription(), mList.get( position ).getCategory());
-
                 i.putExtra( "Product", p);
                 mContext.startActivity( i );
 

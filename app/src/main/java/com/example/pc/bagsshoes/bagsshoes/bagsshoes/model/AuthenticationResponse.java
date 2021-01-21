@@ -3,11 +3,13 @@ package com.example.pc.bagsshoes.bagsshoes.bagsshoes.model;
 public class AuthenticationResponse{
     private String token;
     private String error;
+    private int userId;
     public AuthenticationResponse() {
 
     }
 
-    public AuthenticationResponse(String token, String error){
+    public AuthenticationResponse(int userId, String token, String error){
+        this.userId = userId;
         this.token = token;
         this.error = error;
     }
@@ -26,5 +28,13 @@ public class AuthenticationResponse{
 
     public String getError(){
         return this.error;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }

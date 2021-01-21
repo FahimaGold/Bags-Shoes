@@ -21,6 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint;
 import android.widget.Toast;
 
 import com.example.pc.bagsshoes.R;
+import com.example.pc.bagsshoes.bagsshoes.bagsshoes.adapters.CartAdapter;
 import com.example.pc.bagsshoes.databinding.ActivityHomeBinding;
 
 
@@ -55,6 +56,8 @@ public class HomeActivity extends AppCompatActivity {
                         break;
                     case R.id.action_cart:
                         Toast.makeText(HomeActivity.this, "Cart", Toast.LENGTH_SHORT).show();
+                        i = new Intent(getApplicationContext(), CartActivity.class );
+                        startActivity( i );
                         break;
                     case R.id.action_profile:
                         Toast.makeText(HomeActivity.this, "Profile", Toast.LENGTH_SHORT).show();

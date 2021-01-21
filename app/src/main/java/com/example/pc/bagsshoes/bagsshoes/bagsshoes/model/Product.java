@@ -13,7 +13,7 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "product")
 public class Product implements Parcelable {
     @PrimaryKey
-    private long id;
+    private int id;
     private String brand;
     private int price;
     private String imgUrl;
@@ -26,7 +26,7 @@ public class Product implements Parcelable {
     }
 
 
-     public Product(long id, String brand,int price, String imgUrl, String description, String category){
+     public Product(int id, String brand,int price, String imgUrl, String description, String category){
         this.id = id;
         this.brand = brand;
         this.price = price;
@@ -36,7 +36,7 @@ public class Product implements Parcelable {
     }
 
     public Product(Parcel in) {
-        id = in.readLong();
+        id = in.readInt();
         brand = in.readString();
         price = in.readInt();
         imgUrl = in.readString();
@@ -56,7 +56,7 @@ public class Product implements Parcelable {
         }
     };
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
@@ -80,7 +80,7 @@ public class Product implements Parcelable {
         return price;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -111,7 +111,7 @@ public class Product implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong( id );
+        dest.writeInt( id );
         dest.writeString( brand );
         dest.writeInt( price );
         dest.writeString( imgUrl );

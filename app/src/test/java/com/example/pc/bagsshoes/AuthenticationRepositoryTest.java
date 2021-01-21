@@ -36,7 +36,7 @@ public class AuthenticationRepositoryTest {
     @Test
     public void registerUserTest(){
         User user = new User("some.email@example.com", "firtname", "surname", "0770369971", "somePassword");
-        AuthenticationResponse authenticationResponse = new AuthenticationResponse("gggg99aaddfxz", "password");
+        AuthenticationResponse authenticationResponse = new AuthenticationResponse(1,"gggg99aaddfxz", "password");
         when(userAPIService.registerUser( user )).thenReturn( Observable.just( authenticationResponse ) );
         TestObserver<AuthenticationResponse> testObserver = new TestObserver<>();
         authenticationRepository.registerUser( user ).subscribe(testObserver);
@@ -47,7 +47,7 @@ public class AuthenticationRepositoryTest {
     @Test
     public void loginUserTest(){
         UserCredentials user = new UserCredentials("some.email@example.com",  "somePassword");
-        AuthenticationResponse authenticationResponse = new AuthenticationResponse("gggg99aaddfxz", "password");
+        AuthenticationResponse authenticationResponse = new AuthenticationResponse(1,"gggg99aaddfxz", "password");
         when(userAPIService.loginUser( user )).thenReturn( Observable.just( authenticationResponse ) );
         TestObserver<AuthenticationResponse> testObserver = new TestObserver<>();
         authenticationRepository.loginUser( user ).subscribe(testObserver);
