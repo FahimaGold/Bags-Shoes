@@ -5,9 +5,13 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import dagger.hilt.android.AndroidEntryPoint;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,17 +20,23 @@ import android.widget.Toast;
 import com.example.pc.bagsshoes.R;
 import com.example.pc.bagsshoes.bagsshoes.bagsshoes.adapters.CartAdapter;
 import com.example.pc.bagsshoes.bagsshoes.bagsshoes.adapters.ProductAdapter;
+import com.example.pc.bagsshoes.bagsshoes.bagsshoes.helpers.SharedPreferencesHelper;
 import com.example.pc.bagsshoes.bagsshoes.bagsshoes.model.Product;
+import com.example.pc.bagsshoes.bagsshoes.bagsshoes.viewmodel.CartViewModel;
+import com.example.pc.bagsshoes.bagsshoes.bagsshoes.viewmodel.ProductDetailViewModel;
 import com.example.pc.bagsshoes.databinding.FragmentCartBinding;
 import com.example.pc.bagsshoes.databinding.FragmentFavoritesBinding;
 
 import java.util.ArrayList;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link CartFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+@AndroidEntryPoint
 public class CartFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
@@ -41,6 +51,7 @@ public class CartFragment extends Fragment {
     private FragmentCartBinding binding;
     private CartAdapter adapter;
     private ArrayList<Product> cartList;
+    private CartViewModel cartViewModel;
     public CartFragment() {
         // Required empty public constructor
     }
@@ -84,6 +95,9 @@ public class CartFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated( view, savedInstanceState );
         initRecyclerView();
+        cartViewModel = new ViewModelProvider(this).get( CartViewModel.class);
+        cartViewModel.getCartProducts( new SharedPreferencesHelper( getContext() ).getUserId() );
+        observeData();
 
     }
 
@@ -95,5 +109,23 @@ public class CartFragment extends Fragment {
         binding.cartRecyclerview.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         adapter = new CartAdapter( getContext(), cartList);
         binding.cartRecyclerview.setAdapter(adapter);
+    }
+
+    private void observeData() {
+
+        cartViewModel.getProducts().observe(getViewLifecycleOwner(), new Observer<ArrayList<Product>>() {
+            @Override
+            public void onChanged(ArrayList<Product> products) {
+                Log.e(TAG, "onChanged: " + products.size() );
+
+                if(products == null || products.size() == 0)
+
+                    binding.noFavoritesText.setVisibility(View.VISIBLE);
+                else{
+                    adapter.updateList(products);
+
+                }
+            }
+        });
     }
 }

@@ -14,16 +14,22 @@ import dagger.hilt.android.AndroidEntryPoint;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.pc.bagsshoes.R;
+import com.example.pc.bagsshoes.bagsshoes.bagsshoes.helpers.SharedPreferencesHelper;
+import com.example.pc.bagsshoes.bagsshoes.bagsshoes.model.Cart;
 import com.example.pc.bagsshoes.bagsshoes.bagsshoes.model.Product;
 import com.example.pc.bagsshoes.bagsshoes.bagsshoes.helpers.StringRProvider;
+import com.example.pc.bagsshoes.bagsshoes.bagsshoes.viewmodel.CartViewModel;
 import com.example.pc.bagsshoes.bagsshoes.bagsshoes.viewmodel.ProductDetailViewModel;
 import com.example.pc.bagsshoes.databinding.FragmentProductBinding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,6 +45,7 @@ public class ProductFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private FragmentProductBinding binding;
     private ProductDetailViewModel productDetailViewModel;
+    private CartViewModel cartViewModel;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -92,7 +99,7 @@ public class ProductFragment extends Fragment {
         binding.productDetailBrand.setText( p.getBrand() );
         Glide.with(this).load( StringRProvider.BASE_URL + p.getImgUrl())
                 .into(binding.productDetailImage);
-        binding.productDetailPrice.setText( p.getPrice() + "DA");
+        binding.productDetailPrice.setText( p.getPrice() + "$");
         binding.descriptionContent.setText( p.getDescription() );
         binding.productCode.setText( p.getId() + "" );
         binding.available.setText( "In store" );
@@ -111,6 +118,25 @@ public class ProductFragment extends Fragment {
 
             }
         } );
+
+        cartViewModel = new ViewModelProvider(this).get( CartViewModel.class);
+        observeAddingtoCart();
+        ProductActivity.activityProductBinding.productBottomNavigation.setOnNavigationItemSelectedListener( new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_cart:
+                        int productId = Integer.parseInt(binding.productCode.getText().toString());
+                        cartViewModel.addProductToCart( new Cart( new SharedPreferencesHelper( getContext()).getUserId(), productId) );
+                        break;
+                    case R.id.action_buy:
+                        Toast.makeText(getContext(), "Buy", Toast.LENGTH_SHORT).show();
+                        break;
+
+                }
+                return true;
+            }
+        } );
     }
 
 
@@ -119,7 +145,6 @@ public class ProductFragment extends Fragment {
         productDetailViewModel.checkFavorite().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
-                Toast.makeText( getContext(), "This product is favorite " + aBoolean , Toast.LENGTH_SHORT ).show();
                 if(aBoolean)
                     binding.favoritesIcon.setColorFilter( ContextCompat.getColor( getContext(),R.color.colorPrimary ), PorterDuff.Mode.SRC_IN);
 
@@ -128,4 +153,13 @@ public class ProductFragment extends Fragment {
         });
     }
 
+    private void observeAddingtoCart(){
+        cartViewModel.getProductAddedResponse().observe( getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                if(s != null && !s.isEmpty())
+                    Toast.makeText( getContext(),  s, Toast.LENGTH_SHORT ).show();
+            }
+        } );
+    }
 }

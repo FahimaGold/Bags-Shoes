@@ -98,7 +98,7 @@ public class AuthenticationViewModel extends ViewModel {
                     @Override
                     public void onNext(@NonNull AuthenticationResponse authenticationResponse) {
                         response.setValue( authenticationResponse );
-                        Log.i("userModel","user id is " + authenticationResponse.getUserId());
+
                     }
 
                     @Override
