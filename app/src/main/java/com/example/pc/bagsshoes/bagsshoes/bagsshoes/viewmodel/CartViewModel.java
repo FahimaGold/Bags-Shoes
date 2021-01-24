@@ -28,7 +28,7 @@ import io.reactivex.disposables.Disposable;
 public class CartViewModel extends ViewModel {
     private CartRepository cartRepository;
     private MutableLiveData<ArrayList<Product>> cartProducts = new MutableLiveData<>();
-    private MutableLiveData<String> addingResponse = new MutableLiveData<>();
+    private MutableLiveData<String> actionResponse = new MutableLiveData<>();
 
     @ViewModelInject
     public CartViewModel(CartRepository cartRepository){
@@ -39,8 +39,8 @@ public class CartViewModel extends ViewModel {
         return cartProducts;
     }
 
-    public MutableLiveData<String> getProductAddedResponse(){
-        return addingResponse;
+    public MutableLiveData<String> getProductActionResponse(){
+        return actionResponse;
     }
 
     public void addProductToCart(Cart cart) {
@@ -56,9 +56,9 @@ public class CartViewModel extends ViewModel {
                     @Override
                     public void onNext(@NonNull Map<String, String> response) {
 
-                            addingResponse.setValue( response.get( "response" ) );
+                        actionResponse.setValue( response.get( "response" ) );
 
-                        Log.i("cartRes","is " + addingResponse.getValue());
+                        Log.i("cartRes","is " + actionResponse.getValue());
                     }
 
                     @Override
@@ -102,4 +102,36 @@ public class CartViewModel extends ViewModel {
                     }
                 } );
     }
+
+
+    public void removeProductFromCart(int userId, int productId) {
+        cartRepository.removeProductFromCart( userId, productId )
+                .subscribeOn( SchedulerProvider.getInstance().io() )
+                .observeOn( SchedulerProvider.getInstance().ui() )
+                .subscribe( new Observer<Map<String, String>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull Map<String, String> response) {
+
+                        actionResponse.setValue( response.get( "response" ) );
+
+                        Log.i("cartRes","is " + actionResponse.getValue());
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.e("Error ","Error at " + e);
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                } );
+    }
+
 }

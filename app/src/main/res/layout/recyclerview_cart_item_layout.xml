@@ -50,15 +50,17 @@
         app:layout_constraintTop_toBottomOf="@+id/productBrand" />
 
     <ImageView
-        android:id="@+id/img_close"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="5dp"
-        android:layout_marginTop="20dp"
-        android:src="@android:drawable/ic_delete"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/productImage"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/closeImage"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="50dp"
+        android:layout_marginStart="304dp"
+        android:contentDescription="@string/product_image"
+        android:cropToPadding="true"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:srcCompat="@drawable/ic_action_delete" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -28,4 +28,8 @@ public class CartRepository {
     public Observable<Map<String, String>> addProductToCart(Cart cart){
         return cartAPIService.addToCart( cart );
     }
+
+    public Observable<Map<String, String>> removeProductFromCart(int userId, int productId){
+        return cartAPIService.removeProductFromCart( userId, productId );
+    }
 }

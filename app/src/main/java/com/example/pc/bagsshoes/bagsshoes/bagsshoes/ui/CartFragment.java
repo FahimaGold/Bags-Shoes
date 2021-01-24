@@ -21,6 +21,7 @@ import com.example.pc.bagsshoes.R;
 import com.example.pc.bagsshoes.bagsshoes.bagsshoes.adapters.CartAdapter;
 import com.example.pc.bagsshoes.bagsshoes.bagsshoes.adapters.ProductAdapter;
 import com.example.pc.bagsshoes.bagsshoes.bagsshoes.helpers.SharedPreferencesHelper;
+import com.example.pc.bagsshoes.bagsshoes.bagsshoes.model.Cart;
 import com.example.pc.bagsshoes.bagsshoes.bagsshoes.model.Product;
 import com.example.pc.bagsshoes.bagsshoes.bagsshoes.viewmodel.CartViewModel;
 import com.example.pc.bagsshoes.bagsshoes.bagsshoes.viewmodel.ProductDetailViewModel;
@@ -52,6 +53,8 @@ public class CartFragment extends Fragment {
     private CartAdapter adapter;
     private ArrayList<Product> cartList;
     private CartViewModel cartViewModel;
+    private CartAdapter.OnClickListener onClickListener;
+
     public CartFragment() {
         // Required empty public constructor
     }
@@ -98,17 +101,30 @@ public class CartFragment extends Fragment {
         cartViewModel = new ViewModelProvider(this).get( CartViewModel.class);
         cartViewModel.getCartProducts( new SharedPreferencesHelper( getContext() ).getUserId() );
         observeData();
+        observeRemovingtoCart();
+
+        binding.cartRecyclerview.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        } );
 
     }
 
     private void initRecyclerView() {
-        Toast.makeText( getContext(), "Hola", Toast.LENGTH_SHORT ).show();
         cartList = new ArrayList<>();
-        cartList.add( new Product(1, "Gucci", 3642, "", "Gucci Shoe", "SHOE" ) );
         binding.cartRecyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.cartRecyclerview.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
-        adapter = new CartAdapter( getContext(), cartList);
+        adapter = new CartAdapter( getContext(), cartList, new CartAdapter.OnClickListener() {
+            @Override
+            public void onCloseClick(View view, int position) {
+                cartViewModel.removeProductFromCart(  new SharedPreferencesHelper( getContext() ).getUserId(), adapter.getProductAt( position ).getId()  );
+                updateListAfterRemoval(position);
+            }
+        } );
         binding.cartRecyclerview.setAdapter(adapter);
+
     }
 
     private void observeData() {
@@ -123,9 +139,33 @@ public class CartFragment extends Fragment {
                     binding.noFavoritesText.setVisibility(View.VISIBLE);
                 else{
                     adapter.updateList(products);
+                    binding.totalPrice.setText( "" + adapter.getTotalPrice() );
 
                 }
             }
         });
+        binding.totalPrice.setText( "" + adapter.getTotalPrice() + "$" );
+    }
+
+
+    private void observeRemovingtoCart(){
+        cartViewModel.getProductActionResponse().observe( getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                if(s != null && !s.isEmpty()){
+                    adapter.notifyDataSetChanged();
+                    Toast.makeText( getContext(),  s, Toast.LENGTH_SHORT ).show();
+                    binding.totalPrice.setText( "" + adapter.getTotalPrice() + "$" );
+
+
+                }
+
+            }
+        } );
+    }
+
+    private void updateListAfterRemoval(int position){
+        adapter.getList().remove( position );
+        adapter.notifyDataSetChanged();
     }
 }

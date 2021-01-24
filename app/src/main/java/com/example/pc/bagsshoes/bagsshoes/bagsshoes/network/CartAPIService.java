@@ -13,9 +13,11 @@ import java.util.Map;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface CartAPIService {
     @GET("{id}")
@@ -23,4 +25,7 @@ public interface CartAPIService {
 
     @POST("add")
     Observable<Map<String, String>> addToCart(@Body Cart cart);
+
+    @DELETE("remove")
+    Observable<Map<String, String>> removeProductFromCart(@Query("user_id") int user_id, @Query("product_id") int id);
 }

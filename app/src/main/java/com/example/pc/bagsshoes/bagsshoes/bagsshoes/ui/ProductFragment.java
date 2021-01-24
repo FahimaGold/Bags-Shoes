@@ -154,7 +154,7 @@ public class ProductFragment extends Fragment {
     }
 
     private void observeAddingtoCart(){
-        cartViewModel.getProductAddedResponse().observe( getViewLifecycleOwner(), new Observer<String>() {
+        cartViewModel.getProductActionResponse().observe( getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
                 if(s != null && !s.isEmpty())
