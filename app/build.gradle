@@ -6,7 +6,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.example.pc.bagsshoes"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -110,10 +110,15 @@ dependencies {
     androidTestImplementation 'androidx.test:rules:1.1.1'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     implementation 'com.squareup.okhttp3:okhttp:4.8.0'
+
+    // Stripe Android SDK
+    implementation 'com.stripe:stripe-android:16.1.1'
+
     testImplementation "com.squareup.okhttp3:mockwebserver:4.8.0"
     testImplementation 'org.mockito:mockito-core:2.19'
     testImplementation "androidx.arch.core:core-testing:2.1.0"
     androidTestImplementation "android.arch.core:core-testing:$room_version"
+
 
 
 }

@@ -14,6 +14,7 @@ import dagger.hilt.android.components.ApplicationComponent;
 import com.example.pc.bagsshoes.bagsshoes.bagsshoes.helpers.SharedPreferencesHelper;
 import com.example.pc.bagsshoes.bagsshoes.bagsshoes.network.CartAPIService;
 import com.example.pc.bagsshoes.bagsshoes.bagsshoes.network.ProductAPIService;
+import com.example.pc.bagsshoes.bagsshoes.bagsshoes.network.PurchaseAPIService;
 import com.example.pc.bagsshoes.bagsshoes.bagsshoes.network.UserAPIService;
 import com.example.pc.bagsshoes.bagsshoes.bagsshoes.helpers.StringRProvider;
 
@@ -94,5 +95,18 @@ public class NetworkModule {
                 .addCallAdapterFactory( RxJava2CallAdapterFactory.create())
                 .build()
                 .create(CartAPIService.class);
+    }
+
+    @Provides
+    @Singleton
+    public static PurchaseAPIService providePurchaseAPIService(OkHttpClient okHttpClient){
+
+        return new Retrofit.Builder()
+                .baseUrl( StringRProvider.BASE_URL +"purchase/" )
+                .client( okHttpClient )
+                .addConverterFactory( GsonConverterFactory.create())
+                .addCallAdapterFactory( RxJava2CallAdapterFactory.create())
+                .build()
+                .create(PurchaseAPIService.class);
     }
 }

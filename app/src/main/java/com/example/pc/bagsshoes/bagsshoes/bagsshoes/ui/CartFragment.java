@@ -1,5 +1,6 @@
 package com.example.pc.bagsshoes.bagsshoes.bagsshoes.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -29,6 +30,7 @@ import com.example.pc.bagsshoes.databinding.FragmentCartBinding;
 import com.example.pc.bagsshoes.databinding.FragmentFavoritesBinding;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static android.content.ContentValues.TAG;
 
@@ -103,9 +105,19 @@ public class CartFragment extends Fragment {
         observeData();
         observeRemovingtoCart();
 
-        binding.cartRecyclerview.setOnClickListener( new View.OnClickListener() {
+        binding.checkoutBtn.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent i = new Intent(getContext(), CheckoutActivity.class);
+                i.putExtra( "amount", binding.totalPrice.getText().toString() );
+                ArrayList<Integer> idsList = new ArrayList();
+
+                //Retrieving products ids for the checkout to save them on server for accountability
+                for(int j = 0; j< adapter.getList().size(); ++j)
+                    idsList.add(adapter.getList().get(j).getId());
+
+                i.putIntegerArrayListExtra( "products",  idsList);
+                startActivity( i );
 
             }
         } );
