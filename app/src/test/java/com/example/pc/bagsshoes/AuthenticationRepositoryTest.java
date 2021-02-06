@@ -28,7 +28,7 @@ public class AuthenticationRepositoryTest {
     private AuthenticationRepository authenticationRepository;
 
     @Before
-    public void setUp() throws Exception{
+    public void setUp() {
         MockitoAnnotations.initMocks( this );
         authenticationRepository = new AuthenticationRepository( userAPIService, sharedPreferencesHelper );
     }

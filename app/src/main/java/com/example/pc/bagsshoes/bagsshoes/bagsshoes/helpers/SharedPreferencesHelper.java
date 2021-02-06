@@ -9,7 +9,7 @@ import javax.inject.Singleton;
 import dagger.hilt.android.qualifiers.ApplicationContext;
 
 @Singleton
-public class SharedPreferencesHelper implements ISharedPreferencesHelper{
+public class SharedPreferencesHelper{
     private SharedPreferences prefs;
     private final static String TOKEN = "token";
     private final static  String LOGIN = "login";
@@ -23,12 +23,12 @@ public class SharedPreferencesHelper implements ISharedPreferencesHelper{
 
 
 
-    @Override
+
     public String getToken() {
         return prefs.getString( TOKEN, "" );
     }
 
-    @Override
+
     public void setToken(String token) {
         SharedPreferences.Editor mEditor = prefs.edit();
         mEditor.putString(TOKEN, token);
@@ -36,12 +36,12 @@ public class SharedPreferencesHelper implements ISharedPreferencesHelper{
 
     }
 
-    @Override
+
     public boolean isLogin() {
         return prefs.getBoolean( LOGIN, false );
     }
 
-    @Override
+
     public void setLogin(boolean login) {
         SharedPreferences.Editor mEditor = prefs.edit();
         mEditor.putBoolean(LOGIN, login);
@@ -49,12 +49,11 @@ public class SharedPreferencesHelper implements ISharedPreferencesHelper{
 
     }
 
-    @Override
+
     public int getUserId() {
         return prefs.getInt( USER_ID, 0);
     }
 
-    @Override
     public void setUserId(int userId) {
         SharedPreferences.Editor mEditor = prefs.edit();
         mEditor.putInt(USER_ID, userId);

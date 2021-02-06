@@ -8,7 +8,7 @@ public class MyApp extends Application {
         super.onCreate();
         PaymentConfiguration.init(
                 getApplicationContext(),
-                "Your_published_Key"
+                "pk_test_51IDFQGHAaQu8zZLyyxvZjl5AJmPSNGiXGa9bXSyNJbTzZKP8CTPc53xk8ZCzgwBAibDyTcNt0FitFSJbAoIhnXPa00nanjbYxv"
         );
     }
 }

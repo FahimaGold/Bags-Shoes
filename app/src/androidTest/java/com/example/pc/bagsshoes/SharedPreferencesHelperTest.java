@@ -18,15 +18,14 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(AndroidJUnit4.class)
 public class SharedPreferencesHelperTest {
 
-    //Replacing the background task executor with one that runs everything synchronously
-    @Rule
-    public InstantTaskExecutorRule instantExecutorRule = new InstantTaskExecutorRule();
-    
+
     private SharedPreferencesHelper sharedPreferencesHelper;
 
     @Mock
@@ -39,8 +38,26 @@ public class SharedPreferencesHelperTest {
     }
 
     @Test
-    public void getAndSetTokenTest(){
+    public void setAndGetTokenTest(){
+       String token = "aahf.d8ds.ddfdjf";
+       sharedPreferencesHelper.setToken( token );
+       assertEquals( token, sharedPreferencesHelper.getToken() );
 
+    }
+
+    @Test
+    public void setAndGetUserIdTest(){
+        int userId = 1;
+        sharedPreferencesHelper.setUserId( userId );
+        assertEquals( userId, sharedPreferencesHelper.getUserId());
+
+    }
+
+    @Test
+    public void setAndGetLoginTest(){
+        boolean login = true;
+        sharedPreferencesHelper.setLogin( login );
+        assertEquals( login, sharedPreferencesHelper.isLogin() );
 
     }
 }
