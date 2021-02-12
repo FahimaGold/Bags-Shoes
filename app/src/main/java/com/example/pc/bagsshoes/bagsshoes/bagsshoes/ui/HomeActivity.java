@@ -22,6 +22,8 @@ import android.widget.Toast;
 
 import com.example.pc.bagsshoes.R;
 import com.example.pc.bagsshoes.bagsshoes.bagsshoes.adapters.CartAdapter;
+import com.example.pc.bagsshoes.bagsshoes.bagsshoes.helpers.BottomNavigationHelper;
+import com.example.pc.bagsshoes.bagsshoes.bagsshoes.helpers.IBottomNavigationHelper;
 import com.example.pc.bagsshoes.databinding.ActivityHomeBinding;
 
 
@@ -30,6 +32,8 @@ public class HomeActivity extends AppCompatActivity {
 
 
     private ActivityHomeBinding binding;
+    public com.google.android.material.bottomnavigation.BottomNavigationView bottomNavigationView;
+    private IBottomNavigationHelper iBottomNavigationHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,34 +42,10 @@ public class HomeActivity extends AppCompatActivity {
         setContentView( binding.getRoot() );
         getSupportFragmentManager().beginTransaction().replace(R.id.home_fragment_holder,new HomeFragment())
                 .commit();
+        bottomNavigationView = (com.google.android.material.bottomnavigation.BottomNavigationView) findViewById(R.id.bottom_navigation);
+        iBottomNavigationHelper = new BottomNavigationHelper( this, bottomNavigationView );
+        iBottomNavigationHelper.setOnBottomNavigationViewItemClick();
 
-
-
-        com.google.android.material.bottomnavigation.BottomNavigationView bottomNavigationView = (com.google.android.material.bottomnavigation.BottomNavigationView) findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new com.google.android.material.bottomnavigation.BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.action_home:
-                        Intent i = new Intent(getApplicationContext(), HomeActivity.class);
-                        startActivity( i );
-                        break;
-                    case R.id.action_favorite:
-                         i = new Intent(getApplicationContext(), FavoritesActivity.class);
-                        startActivity( i );
-                        break;
-                    case R.id.action_cart:
-                        Toast.makeText(HomeActivity.this, "Cart", Toast.LENGTH_SHORT).show();
-                        i = new Intent(getApplicationContext(), CartActivity.class );
-                        startActivity( i );
-                        break;
-                    case R.id.action_profile:
-                        Toast.makeText(HomeActivity.this, "Profile", Toast.LENGTH_SHORT).show();
-                        break;
-                }
-                return true;
-            }
-        });
     }
         
 }
