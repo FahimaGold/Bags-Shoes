@@ -52,7 +52,11 @@ A native Android e-commerce application for a Bags and Shoes store, designed usi
 git clone https://github.com/your-username/bags-shoes-android-app.git
 cd Bags-Shoes
 ```
+
 ## Screenshots
+
+### 🎨 UI/UX Note
+The current UI/UX design is kept minimal and functional to focus on showcasing the app’s architectural structure, data flow, and feature completeness. While the visuals are basic, the goal was to demonstrate strong backend integration, reactive patterns (RxJava), and a clean MVVM-based implementation.
 
 <img src="img/first_page.png" alt="First Page" width="300"/>
 <img src="img/registration_page.png" alt="Registration Page" width="300"/>
