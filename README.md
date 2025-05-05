@@ -13,7 +13,6 @@ A native Android e-commerce application for a Bags and Shoes store, designed usi
 - User authentication (login, register, etc.)
 - **Product Catalog** with category, price, and inventory filters
 - **Cart Management** for adding/removing products
-- **Smooth UI** designed for modern Android devices
 
 ## 🛠️ **Tech Stack**
 
