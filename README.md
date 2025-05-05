@@ -58,8 +58,13 @@ cd Bags-Shoes
 ### 🎨 UI/UX Note
 The current UI/UX design is kept minimal and functional to focus on showcasing the app’s architectural structure, data flow, and feature completeness. While the visuals are basic, the goal was to demonstrate strong backend integration, reactive patterns (RxJava), and a clean MVVM-based implementation.
 
-<img src="img/first_page.png" alt="First Page" width="300"/>
-<img src="img/registration_page.png" alt="Registration Page" width="300"/>
-<img src="img/products_page.png" alt="Products Page" width="300"/>
-<img src="img/product_page.png" alt="Product Page" width="300"/>
-<img src="img/product_added_favorite.png" alt="Product Added to Favorites" width="300"/>
+<p align="center">
+  <img src="img/first_page.png" alt="First Page" width="45%"/>
+  <img src="img/registration_page.png" alt="Registration Page" width="45%"/>
+</p>
+
+<p align="center">
+  <img src="img/products_page.png" alt="Products Page" width="45%"/>
+  <img src="img/product_page.png" alt="Product Page" width="45%"/>
+</p>
+alt="Product Added to Favorites" width="300"/>
